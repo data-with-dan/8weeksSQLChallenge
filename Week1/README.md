@@ -25,10 +25,17 @@ GROUP BY sales.customer_id
 ORDER BY sales.customer_id;
 
 | customer_id | total_amount |
-|------------|-------------|
-| A          | 76          |
-| B          | 74          |
-| C          | 36          |
+| --- | --- |
+| A | 76 |
+| B | 74 |
+| C | 36 |
+
+
+| customer_id | total_amount |
+|-------------|--------------|
+| A           | 76           |
+| B           | 74           |
+| C           | 36           |
 
 2) How many days has each customer visited the restaurant?
 SELECT customer_id, COUNT(DISTINCT order_date) AS total_visits
