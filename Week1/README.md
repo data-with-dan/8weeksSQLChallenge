@@ -41,6 +41,7 @@ ORDER BY sales.customer_id;
 | A           | 76           |
 | B           | 74           |
 | C           | 36           |
+
 - Customer A spent $76
 - Customer B spent $74
 - Customer C spent $36
@@ -64,6 +65,7 @@ GROUP BY customer_id;
 | A          | 4           |
 | B          | 6           |
 | C          | 2           |
+
 - Customer A has had 4 visits
 - Customer B has had 6 visits
 - Customer C has had 2 visits
@@ -101,7 +103,8 @@ WHERE rn = 1;
 | A           | sushi        |
 | B           | curry        |
 | C           | ramen        |
-- Customer A simultaenously ordered curry and sushi first
+
+- Customer A simultaneously ordered curry and sushi first
 - Customer B ordered curry first
 - Customer C ordered ramen first
 
@@ -128,6 +131,7 @@ LIMIT 1;
 | product_name |most_purchased|
 |------------|-------------|
 | ramen          | 8           |
+
 - The most purchased item on the menu is ramen and it was ordered 8 times
 
 #### 5) Which item was the most popular for each customer?
@@ -171,6 +175,7 @@ WHERE rank = 1;
 | B           | curry        |       2      |
 | B           | ramen        |       2      |
 | C           | ramen        |       3      |
+
 - Customer A ordered ramen the most, on 3 occasions.
 - Customer B ordered sushi, curry, and ramen the most, 2 times each.
 - Customer C ordered ramen the most, on 3 occasions.
@@ -214,6 +219,7 @@ ORDER BY customer_id;
 |-------------|--------------|
 | A           | ramen        |
 | B           | sushi        |
+
 - Customer A ordered ramen first after becoming a member
 - Customer B ordered sushi first after becoming a member
 
@@ -240,7 +246,7 @@ SELECT
   product_name
 FROM member_last_order
 JOIN menu 
-  ON member_first_order.product_id = menu.product_id
+  ON member_last_order.product_id = menu.product_id
 WHERE row_num = 1
 ORDER BY customer_id;
 ```
@@ -289,6 +295,7 @@ ORDER BY sales.customer_id;
 |-------------|--------------|------------|
 | A           | 2            | 25         |    
 | B           | 3            | 40         |   
+
 - Customer A purchased 2 items and spent $25 before becoming a member
 - Customer B purchased 3 items and spent $40 before becoming a member
 
@@ -327,6 +334,7 @@ ORDER BY total_points DESC;
 | B           | 940          |
 | A           | 860          |
 | C           | 360          |
+
 - Customer B has the most points, at 940 points
 - Customer A has 860 points
 - Customer C has 360 points
@@ -375,6 +383,7 @@ ORDER BY points DESC;
 |-------------|--------------|
 | A           | 1020        |
 | B           | 320        |
+
 - Customer A has 1020 points
 - Customer B has 320 points
 
