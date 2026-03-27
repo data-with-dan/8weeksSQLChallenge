@@ -2,12 +2,12 @@
 
 Danny wants to use data to better understand his customers — including their visiting patterns, spending behavior, and favorite menu items.
 
-## 📊 Datasets
+## Datasets
 - `sales`
 - `menu`
 - `members`
 
-## 🧩 ERD
+## ERD
 *Insert ERD Diagram Here*
 
 ---
@@ -24,20 +24,22 @@ JOIN menu
 GROUP BY sales.customer_id
 ORDER BY sales.customer_id;
 
-Resulting table:
-customer_id, total_amount
-A 76
-B 74
-C 36
+| customer_id | total_amount |
+|------------|-------------|
+| A          | 76          |
+| B          | 74          |
+| C          | 36          |
 
 2) How many days has each customer visited the restaurant?
 SELECT customer_id, COUNT(DISTINCT order_date) AS total_visits
 FROM sales
 GROUP BY customer_id;
-customer_id, total_visits
-A 4
-B 6
-C 2
+
+| customer_id |total_visits|
+|------------|-------------|
+| A          | 4           |
+| B          | 6           |
+| C          | 2           |
 
 3) What was the first item from the menu purchased by each customer?
 SELECT DISTINCT customer_id, product_name AS first_order
