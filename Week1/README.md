@@ -1,17 +1,29 @@
-Danny wants to use data to answer questions about his customers, especially about their visiting patterns, how much money they've spent and also which menu items are their favourite. 
-3 key datasets:
-- sales
-- menu
-- members
+# 🍽️ Danny’s Diner SQL Case Study
 
-ERD
-* Insert ERD Diagram
-1) What is the total amount each customer spent at the restaurant?
-SELECT sales.customer_id, SUM(menu.price) AS total_amount
+Danny wants to use data to better understand his customers — including their visiting patterns, spending behavior, and favorite menu items.
+
+## 📊 Datasets
+- `sales`
+- `menu`
+- `members`
+
+## 🧩 ERD
+*Insert ERD Diagram Here*
+
+---
+
+## 1) Total amount each customer spent
+
+```sql
+SELECT 
+  sales.customer_id, 
+  SUM(menu.price) AS total_amount
 FROM sales 
-JOIN menu ON sales.product_id = menu.product_id
-GROUP BY customer_id
-ORDER BY customer_id;
+JOIN menu 
+  ON sales.product_id = menu.product_id
+GROUP BY sales.customer_id
+ORDER BY sales.customer_id;
+
 Resulting table:
 customer_id, total_amount
 A 76
