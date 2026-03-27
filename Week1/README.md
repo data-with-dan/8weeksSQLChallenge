@@ -1,6 +1,6 @@
 # 🍽️ Danny’s Diner SQL Case Study
 
-Danny wants to use data to better understand his customers — including their visiting patterns, spending behavior, and favorite menu items.
+Danny wants to use data to better understand his customers, including their visiting patterns, spending behavior, and favorite menu items.
 
 ## Datasets
 - `sales`
@@ -12,7 +12,7 @@ Danny wants to use data to better understand his customers — including their v
 
 ---
 
-## 1) Total amount each customer spent
+## 1) What is the total amount each customer spent at the restaurant?
 
 ```sql
 SELECT 
@@ -31,7 +31,7 @@ ORDER BY sales.customer_id;
 | B           | 74           |
 | C           | 36           |
 
-2) How many days has each customer visited the restaurant?
+## 2) How many days has each customer visited the restaurant?
 ```sql
 SELECT 
   customer_id, 
@@ -46,7 +46,7 @@ GROUP BY customer_id;
 | B          | 6           |
 | C          | 2           |
 
-3) What was the first item from the menu purchased by each customer?
+## 3) What was the first item from the menu purchased by each customer?
 
 ```sql
 SELECT DISTINCT
@@ -73,7 +73,7 @@ A sushi
 B curry
 C ramen
 
-4) What is the most purchased item on the menu and how many times was it purchased by all customers?
+## 4) What is the most purchased item on the menu and how many times was it purchased by all customers?
 ```sql
 SELECT 
   menu.product_name, 
@@ -88,7 +88,7 @@ LIMIT 1;
 product_name most_purchased
 ramen 8
 
-5) Which item was the most popular for each customer?
+## 5) Which item was the most popular for each customer?
 ```sql
 WITH popular AS (
   SELECT
@@ -121,7 +121,7 @@ B curry 2
 B sushi 2
 C ramen 3
 
-6) Which item was purchased first by the customer after they became a member?
+## 6) Which item was purchased first by the customer after they became a member?
 ```sql
 WITH member_first_order AS (
   SELECT
@@ -153,7 +153,7 @@ customer_id, product_name
 A ramen
 B sushi
 
-7) Which item was purchased just before the customer became a member?
+## 7) Which item was purchased just before the customer became a member?
 ```sql
 WITH member_first_order AS (
   SELECT
@@ -184,7 +184,7 @@ customer_id, product_name
 A sushi
 B sushi
 
-8) What is the total items and amount spent for each member before they became a member?
+## 8) What is the total items and amount spent for each member before they became a member?
 ```sql
 SELECT 
   sales.customer_id, 
@@ -203,7 +203,7 @@ customer_id, total_items, total_sales
 A 2 25
 B 3 40
 
-9) If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+## 9) If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 ```sql
 WITH points AS (
   SELECT 
@@ -229,7 +229,7 @@ B 940
 A 860
 C 360
 
-10) In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+## 10) In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 ```sql
 WITH dates AS (
   SELECT 
