@@ -1,5 +1,7 @@
 # 🍽️ Danny’s Diner SQL Case Study
 
+![Case Study](CaseStudy1.png)
+
 Danny wants to use data to better understand his customers, including their visiting patterns, spending behavior, and favorite menu items.
 
 ## Datasets
@@ -8,7 +10,7 @@ Danny wants to use data to better understand his customers, including their visi
 - `members`
 
 ## ERD
-*Insert ERD Diagram Here*
+![ERD](ERD.png)
 
 ---
 
