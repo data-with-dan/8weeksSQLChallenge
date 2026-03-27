@@ -1,20 +1,23 @@
-# 🍽️ Danny’s Diner SQL Case Study
+## 🍽️ Danny’s Diner SQL Case Study
 
 ![Case Study](CaseStudy1.png)
 
-Danny wants to use data to better understand his customers, including their visiting patterns, spending behavior, and favorite menu items.
+Danny wants to use data to better understand his customers, including their visiting patterns, spending behavior, and favorite menu items. We will explore these datasets using SQL to answer Danny's business questions. 
 
-## Datasets
+[Case Study Source](https://8weeksqlchallenge.com/case-study-1/)
+
+### Datasets
 - `sales`
 - `menu`
 - `members`
 
-## ERD
+### Entity Relationship Diagram
 ![ERD](ERD.png)
 
 ---
+### Danny's Business Questions and Solutions
 
-### 1) What is the total amount each customer spent at the restaurant?
+#### 1) What is the total amount each customer spent at the restaurant?**
 
 ```sql
 SELECT 
@@ -26,7 +29,7 @@ JOIN menu
 GROUP BY sales.customer_id
 ORDER BY sales.customer_id;
 ```
-#### Steps:
+**Steps:**
 
 - Combine `sales` and `menu` to attach prices to each purchase.  
 - Sum item prices to compute total spend per customer.  
@@ -42,7 +45,7 @@ ORDER BY sales.customer_id;
 - Customer B spent $74
 - Customer C spent $36
 
-### 2) How many days has each customer visited the restaurant?
+#### 2) How many days has each customer visited the restaurant?
 ```sql
 SELECT 
   customer_id, 
@@ -50,7 +53,7 @@ SELECT
 FROM sales
 GROUP BY customer_id;
 ```
-#### Steps:
+**Steps:**
 
 - Count distinct `order_date` values to capture unique visit days.  
 - Use `COUNT(DISTINCT order_date)` to avoid counting multiple purchases on the same day.  
@@ -65,7 +68,7 @@ GROUP BY customer_id;
 - Customer B has had 6 visits
 - Customer C has had 2 visits
 
-### 3) What was the first item from the menu purchased by each customer?
+#### 3) What was the first item from the menu purchased by each customer?
 
 ```sql
 SELECT DISTINCT
@@ -85,7 +88,7 @@ FROM (
 ) x
 WHERE rn = 1;
 ```
-#### Steps:
+**Steps:**
 
 - Join `sales` and `menu` to associate each purchase with its item name.  
 - Use `RANK()` to order purchases by `order_date` for each customer.  
@@ -102,7 +105,7 @@ WHERE rn = 1;
 - Customer B ordered curry first
 - Customer C ordered ramen first
 
-### 4) What is the most purchased item on the menu and how many times was it purchased by all customers?
+#### 4) What is the most purchased item on the menu and how many times was it purchased by all customers?
 ```sql
 SELECT 
   menu.product_name, 
@@ -114,7 +117,7 @@ GROUP BY menu.product_name
 ORDER BY most_purchased DESC
 LIMIT 1;
 ```
-#### Steps:
+**Steps:**
 
 - Join `sales` and `menu` to map each purchase to its item name.  
 - Count purchases per item using `COUNT(sales.product_id)`.  
@@ -127,7 +130,7 @@ LIMIT 1;
 | ramen          | 8           |
 - The most purchased item on the menu is ramen and it was ordered 8 times
 
-### 5) Which item was the most popular for each customer?
+#### 5) Which item was the most popular for each customer?
 ```sql
 WITH popular AS (
   SELECT
@@ -153,7 +156,7 @@ SELECT
 FROM popular
 WHERE rank = 1;
 ```
-#### Steps:
+**Steps:**
 
 - Join `sales` and `menu` to associate each purchase with its item name.  
 - Count purchases per item for each customer using `COUNT(*)`.  
@@ -172,7 +175,7 @@ WHERE rank = 1;
 - Customer B ordered sushi, curry, and ramen the most, 2 times each.
 - Customer C ordered ramen the most, on 3 occasions.
 
-### 6) Which item was purchased first by the customer after they became a member?
+#### 6) Which item was purchased first by the customer after they became a member?
 ```sql
 WITH member_first_order AS (
   SELECT
@@ -199,7 +202,7 @@ JOIN menu
 WHERE row_num = 1
 ORDER BY customer_id;
 ```
-#### Steps:
+**Steps:**
 
 - Join `members` and `sales` to link purchases with membership start dates.  
 - Filter for orders placed after `join_date` to consider only post-membership activity.  
@@ -214,7 +217,7 @@ ORDER BY customer_id;
 - Customer A ordered ramen first after becoming a member
 - Customer B ordered sushi first after becoming a member
 
-### 7) Which item was purchased just before the customer became a member?
+#### 7) Which item was purchased just before the customer became a member?
 ```sql
 WITH member_first_order AS (
   SELECT
@@ -241,7 +244,7 @@ JOIN menu
 WHERE row_num = 1
 ORDER BY customer_id;
 ```
-#### Steps:
+**Steps:**
 
 - Join `members` and `sales` to align purchases with membership dates.  
 - Filter for orders placed before `join_date` to capture pre-membership activity.  
@@ -258,7 +261,7 @@ ORDER BY customer_id;
 - Customer B also ordered sushi just before becoming a member
 This might mean that sushi incentivized these customers to sign up!
 
-### 8) What is the total items and amount spent for each member before they became a member?
+#### 8) What is the total items and amount spent for each member before they became a member?
 ```sql
 SELECT 
   sales.customer_id, 
@@ -273,7 +276,7 @@ JOIN menu
 GROUP BY sales.customer_id
 ORDER BY sales.customer_id;
 ```
-#### Steps:
+**Steps:**
 
 - Join `sales` and `members` to align purchases with membership start dates.  
 - Filter for orders placed before `join_date` to capture pre-membership activity.  
@@ -289,7 +292,7 @@ ORDER BY sales.customer_id;
 - Customer A purchased 2 items and spent $25 before becoming a member
 - Customer B purchased 3 items and spent $40 before becoming a member
 
-### 9) If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+#### 9) If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 ```sql
 WITH points AS (
   SELECT 
@@ -310,7 +313,7 @@ JOIN sales
 GROUP BY sales.customer_id
 ORDER BY total_points DESC;
 ```
-#### Steps:
+**Steps:**
 
 - Create a CTE to assign point values per item based on pricing rules.  
 - Use a `CASE` statement to apply a 2x multiplier for sushi and standard points for other items.  
@@ -328,7 +331,7 @@ ORDER BY total_points DESC;
 - Customer A has 860 points
 - Customer C has 360 points
 
-### 10) In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+#### 10) In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 ```sql
 WITH dates AS (
   SELECT 
@@ -359,7 +362,7 @@ GROUP BY sales.customer_id
 ORDER BY points DESC;
 ```
 
-#### Steps:
+**Steps:**
 
 - Create a CTE to define each member’s `join_date`, bonus period end date, and the January cutoff date.  
 - Join `sales` with the membership date table to keep only purchases made after joining and before the end of January.  
