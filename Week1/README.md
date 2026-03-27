@@ -66,12 +66,12 @@ FROM (
 ) x
 WHERE rn = 1;
 ```
-
-customer_id first_order
-A curry
-A sushi
-B curry
-C ramen
+| customer_id | first_order |
+|-------------|--------------|
+| A           | curry        |
+| A           | sushi        |
+| B           | curry        |
+| C           | ramen        |
 
 ## 4) What is the most purchased item on the menu and how many times was it purchased by all customers?
 ```sql
@@ -87,6 +87,9 @@ LIMIT 1;
 ```
 product_name most_purchased
 ramen 8
+| product_name |most_purchased|
+|------------|-------------|
+| ramen          | 8           |
 
 ## 5) Which item was the most popular for each customer?
 ```sql
@@ -114,12 +117,14 @@ SELECT
 FROM popular
 WHERE rank = 1;
 ```
-customer_id, product_name, order_count
-A ramen 3
-B ramen 2
-B curry 2
-B sushi 2
-C ramen 3
+
+| customer_id | product_name |order_count|
+|-------------|--------------|--------------|
+| A           | curry        |       3      |
+| B           | sushi        |       2      |
+| B           | curry        |       2      |
+| B           | ramen        |       2      |
+| C           | ramen        |       3      |
 
 ## 6) Which item was purchased first by the customer after they became a member?
 ```sql
@@ -149,9 +154,10 @@ WHERE row_num = 1
 ORDER BY customer_id;
 ```
 
-customer_id, product_name
-A ramen
-B sushi
+| customer_id | product_name |
+|-------------|--------------|
+| A           | ramen        |
+| B           | sushi        |
 
 ## 7) Which item was purchased just before the customer became a member?
 ```sql
@@ -180,9 +186,11 @@ JOIN menu
 WHERE row_num = 1
 ORDER BY customer_id;
 ```
-customer_id, product_name
-A sushi
-B sushi
+
+| customer_id | product_name |
+|-------------|--------------|
+| A           | sushi        |
+| B           | sushi        |
 
 ## 8) What is the total items and amount spent for each member before they became a member?
 ```sql
@@ -202,6 +210,10 @@ ORDER BY sales.customer_id;
 customer_id, total_items, total_sales
 A 2 25
 B 3 40
+| customer_id | total_items  | total_sales|
+|-------------|--------------|------------|
+| A           | 2            | 25         |    
+| B           | 3            | 40         |   
 
 ## 9) If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 ```sql
@@ -224,10 +236,12 @@ JOIN sales
 GROUP BY sales.customer_id
 ORDER BY total_points DESC;
 ```
-customer_id, total_points
-B 940
-A 860
-C 360
+
+| customer_id | total_points |
+|-------------|--------------|
+| B           | 940          |
+| A           | 860          |
+| C           | 360          |
 
 ## 10) In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 ```sql
@@ -259,9 +273,12 @@ JOIN menu
 GROUP BY sales.customer_id
 ORDER BY points DESC;
 ```
-customer_id, points
-A 1020
-B 320
+
+| customer_id | points |
+|-------------|--------------|
+| A           | 1020        |
+| B           | 320        |
+
 
 
 
