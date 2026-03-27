@@ -101,7 +101,7 @@ WHERE rn = 1;
 | A           | sushi        |
 | B           | curry        |
 | C           | ramen        |
-- Customer A simulatenously ordered curry and sushi first
+- Customer A simultaenously ordered curry and sushi first
 - Customer B ordered curry first
 - Customer C ordered ramen first
 
@@ -166,12 +166,12 @@ WHERE rank = 1;
 
 | customer_id | product_name |order_count|
 |-------------|--------------|--------------|
-| A           | curry        |       3      |
+| A           | ramen        |       3      |
 | B           | sushi        |       2      |
 | B           | curry        |       2      |
 | B           | ramen        |       2      |
 | C           | ramen        |       3      |
-- Customer A ordered curry the most, on 3 occasions.
+- Customer A ordered ramen the most, on 3 occasions.
 - Customer B ordered sushi, curry, and ramen the most, 2 times each.
 - Customer C ordered ramen the most, on 3 occasions.
 
@@ -219,7 +219,7 @@ ORDER BY customer_id;
 
 #### 7) Which item was purchased just before the customer became a member?
 ```sql
-WITH member_first_order AS (
+WITH member_last_order AS (
   SELECT
     members.customer_id, 
     sales.product_id,
@@ -238,7 +238,7 @@ WITH member_first_order AS (
 SELECT 
   customer_id, 
   product_name
-FROM member_first_order
+FROM member_last_order
 JOIN menu 
   ON member_first_order.product_id = menu.product_id
 WHERE row_num = 1
