@@ -17,7 +17,7 @@ Danny wants to use data to better understand his customers, including their visi
 ---
 ### Danny's Business Questions and Solutions
 
-#### 1) What is the total amount each customer spent at the restaurant?**
+#### 1) What is the total amount each customer spent at the restaurant?
 
 ```sql
 SELECT 
